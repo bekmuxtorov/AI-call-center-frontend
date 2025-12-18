@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   LayoutDashboard,
   Phone,
@@ -7,18 +7,13 @@ import {
   PhoneOutgoing,
   Clock,
   Wallet,
-  TrendingUp,
-  Moon,
-  Sun,
   ChevronRight,
   Activity,
   CheckCircle2,
   ArrowUpRight,
   ArrowDownRight,
-  BarChart3,
   Calendar,
   Zap,
-  Cpu,
   Server
 } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';

@@ -5,7 +5,6 @@ import {
     User,
     Settings,
     LogOut,
-    Menu,
     ChevronRight,
     Globe,
     Moon,
@@ -23,7 +22,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ activeMenu, darkMode, toggleTheme, toggleSidebar }) => {
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
-    const [language, setLanguage] = useState('uz');
+    const [language] = useState('uz');
 
     const getPageTitle = (menu: string) => {
         switch (menu) {

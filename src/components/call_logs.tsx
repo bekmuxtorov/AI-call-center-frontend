@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Pause, Search, Download, Filter, Phone, Clock, Calendar as CalendarIcon, Activity as ActivityIcon, ArrowLeft, ChevronRight, Share2, MoreVertical } from 'lucide-react';
 
 interface CallLogsContentProps {
@@ -11,7 +11,6 @@ const CallLogsContent: React.FC<CallLogsContentProps> = ({ darkMode }) => {
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-  const audioRef = useRef(null);
 
   // Mock data
   const callLogs = [
@@ -243,8 +242,8 @@ const CallLogsContent: React.FC<CallLogsContentProps> = ({ darkMode }) => {
                 {selectedCall.transcript.map((msg: any, i: number) => (
                   <div key={i} className={`flex gap-4 ${msg.speaker === 'customer' ? 'flex-row-reverse' : ''}`}>
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${msg.speaker === 'ai'
-                        ? 'bg-blue-100 text-blue-600'
-                        : 'bg-gray-100 text-gray-600'
+                      ? 'bg-blue-100 text-blue-600'
+                      : 'bg-gray-100 text-gray-600'
                       }`}>
                       {msg.speaker === 'ai' ? 'AI' : <Phone size={16} />}
                     </div>
@@ -256,8 +255,8 @@ const CallLogsContent: React.FC<CallLogsContentProps> = ({ darkMode }) => {
                         <span className="text-xs text-gray-500">{msg.time}</span>
                       </div>
                       <div className={`p-4 rounded-2xl text-sm leading-relaxed ${msg.speaker === 'ai'
-                          ? darkMode ? 'bg-blue-500/10 text-blue-100 rounded-tl-none' : 'bg-blue-50 text-blue-900 rounded-tl-none'
-                          : darkMode ? 'bg-gray-700 text-gray-200 rounded-tr-none' : 'bg-gray-100 text-gray-800 rounded-tr-none'
+                        ? darkMode ? 'bg-blue-500/10 text-blue-100 rounded-tl-none' : 'bg-blue-50 text-blue-900 rounded-tl-none'
+                        : darkMode ? 'bg-gray-700 text-gray-200 rounded-tr-none' : 'bg-gray-100 text-gray-800 rounded-tr-none'
                         }`}>
                         {msg.text}
                       </div>
@@ -292,8 +291,8 @@ const CallLogsContent: React.FC<CallLogsContentProps> = ({ darkMode }) => {
                   <div className="flex flex-wrap gap-2">
                     {selectedCall.keyPoints.map((point: string, i: number) => (
                       <span key={i} className={`px-3 py-1.5 rounded-lg text-xs font-medium border ${darkMode
-                          ? 'bg-gray-900/50 border-gray-600 text-gray-300'
-                          : 'bg-gray-50 border-gray-200 text-gray-600'
+                        ? 'bg-gray-900/50 border-gray-600 text-gray-300'
+                        : 'bg-gray-50 border-gray-200 text-gray-600'
                         }`}>
                         #{point}
                       </span>
