@@ -9,16 +9,18 @@ import {
     ChevronRight,
     Globe,
     Moon,
-    Sun
+    Sun,
+    PanelLeft
 } from 'lucide-react';
 
 interface HeaderProps {
     activeMenu: string;
     darkMode: boolean;
     toggleTheme: () => void;
+    toggleSidebar: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ activeMenu, darkMode, toggleTheme }) => {
+const Header: React.FC<HeaderProps> = ({ activeMenu, darkMode, toggleTheme, toggleSidebar }) => {
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
     const [language, setLanguage] = useState('uz');
@@ -54,10 +56,14 @@ const Header: React.FC<HeaderProps> = ({ activeMenu, darkMode, toggleTheme }) =>
 
     return (
         <header className={`sticky top-0 z-20 ${bgColor} border-b ${borderColor} px-8 py-4 flex items-center justify-between transition-colors shadow-sm`}>
-            {/* Left: Breadcrumbs & Mobile Menu */}
+            {/* Left: Sidebar Toggle, Breadcrumbs */}
             <div className="flex items-center gap-4">
-                <button className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <Menu className={textSecondary} size={24} />
+                <button
+                    onClick={toggleSidebar}
+                    className={`p-2 rounded-lg transition-colors ${hoverBg} ${textSecondary}`}
+                    title="Toggle Sidebar"
+                >
+                    <PanelLeft size={24} />
                 </button>
 
                 <div className="hidden md:block">

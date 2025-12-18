@@ -30,8 +30,10 @@ const AiCallCenterDashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeMenu, setActiveMenu] = useState('dashboard');
   const [timeRange, setTimeRange] = useState('7days');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleTheme = () => setDarkMode(!darkMode);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const callsData = [
     { time: '00:00', incoming: 12, outgoing: 8 },
@@ -105,10 +107,9 @@ const AiCallCenterDashboard = () => {
         return (
           <div className="animate-fade-in">
             {/* Header / Filter Row */}
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-4">
               <div>
-                <h2 className={`text-3xl font-bold ${textPrimary} mb-2`}>Dashboard</h2>
-                <p className={textSecondary}>Asosiy boshqaruv paneli - umumiy statistika</p>
+                <h3 className={`text-3xl font-bold ${textPrimary} mb-2`}>Umumiy statistika</h3>
               </div>
 
               {/* Time Range Filter */}
@@ -134,7 +135,7 @@ const AiCallCenterDashboard = () => {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-4 gap-6 mb-4">
               {/* Total Calls Card */}
               <div className={`${cardBg} rounded-2xl p-6 border ${borderColor} transition-all hover:shadow-xl`}>
                 <div className="flex items-start justify-between mb-4">
@@ -326,9 +327,11 @@ const AiCallCenterDashboard = () => {
   return (
     <div className={`flex min-h-screen ${bgColor} transition-colors duration-300 font-sans`}>
       {/* Sidebar */}
-      <aside className={`w-72 flex-shrink-0 border-r ${borderColor} ${cardBg} flex flex-col transition-colors duration-300 z-10 sticky top-0 h-screen`}>
+      <aside
+        className={`${isSidebarOpen ? 'w-72' : 'w-0 overflow-hidden'} flex-shrink-0 border-r ${borderColor} ${cardBg} flex flex-col transition-all duration-300 z-10 sticky top-0 h-screen`}
+      >
         {/* Logo */}
-        <div className={`p-6 border-b ${borderColor} flex-shrink-0`}>
+        <div className={`p-6 border-b ${borderColor} flex-shrink-0 whitespace-nowrap`}>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
               <Phone className="w-6 h-6 text-white" />
@@ -341,8 +344,8 @@ const AiCallCenterDashboard = () => {
         </div>
 
         {/* Menu */}
-        <nav className="p-4 flex-1 overflow-y-auto">
-          <div className="space-y-2 mb-8">
+        <nav className="p-4 flex-1 overflow-y-auto whitespace-nowrap">
+          <div className="space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeMenu === item.id;
@@ -364,15 +367,17 @@ const AiCallCenterDashboard = () => {
               );
             })}
           </div>
+        </nav>
 
-          {/* AI System Status Widget */}
+        {/* AI System Status Widget - Moved to Bottom (Outside Nav) */}
+        <div className="p-4 flex-shrink-0">
           <div className={`p-4 rounded-xl border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-slate-50 border-gray-100'}`}>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <div className={`p-1.5 rounded-lg ${darkMode ? 'bg-blue-500/10' : 'bg-blue-100'}`}>
                   <Zap className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
                 </div>
-                <span className={`text-xs font-semibold ${textPrimary}`}>AI Engine</span>
+                <span className={`text-xs font-semibold ${textPrimary} whitespace-nowrap`}>AI Engine</span>
               </div>
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -384,7 +389,7 @@ const AiCallCenterDashboard = () => {
               <div>
                 <div className="flex justify-between text-[10px] mb-1">
                   <span className={textSecondary}>Optimization</span>
-                  <span className="text-green-500 font-medium">98% Efficient</span>
+                  <span className="text-green-500 font-medium whitespace-nowrap">98% Efficient</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full overflow-hidden ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="h-full bg-gradient-to-r from-blue-500 to-green-500 w-[98%] rounded-full"></div>
@@ -392,17 +397,17 @@ const AiCallCenterDashboard = () => {
               </div>
 
               <div className={`flex items-center gap-2 text-[10px] ${textSecondary}`}>
-                <Server className="w-3 h-3" />
-                <span>Qo'ng'iroqlarni real vaqt rejimida qayta ishlash</span>
+                <Server className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate">Qo'ng'iroqlarni real vaqt rejimida qayta ishlash</span>
               </div>
             </div>
           </div>
-        </nav>
+        </div>
 
         {/* Sidebar Footer */}
         <div className={`p-6 border-t ${borderColor} flex-shrink-0`}>
-          <div className={`text-xs ${textSecondary} text-center`}>
-            v1.0.0 • © 2024 AI Center
+          <div className={`text-xs ${textSecondary} text-center whitespace-nowrap`}>
+            v1.0.0 • © 2025 AI Center
           </div>
         </div>
       </aside>
@@ -410,10 +415,10 @@ const AiCallCenterDashboard = () => {
       {/* Main Layout Area */}
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         {/* Top Header */}
-        <Header activeMenu={activeMenu} darkMode={darkMode} toggleTheme={toggleTheme} />
+        <Header activeMenu={activeMenu} darkMode={darkMode} toggleTheme={toggleTheme} toggleSidebar={toggleSidebar} />
 
         {/* Dynamic Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-5">
           {renderContent()}
         </main>
       </div>
