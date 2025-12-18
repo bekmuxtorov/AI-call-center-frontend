@@ -16,7 +16,10 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   BarChart3,
-  Calendar
+  Calendar,
+  Zap,
+  Cpu,
+  Server
 } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import NumbersConnectivityContent from './numbers_connectivity_page';
@@ -117,10 +120,10 @@ const AiCallCenterDashboard = () => {
                       key={range}
                       onClick={() => setTimeRange(range)}
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${timeRange === range
-                          ? darkMode
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-blue-500 text-white'
-                          : `${textSecondary} ${hoverBg}`
+                        ? darkMode
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-blue-500 text-white'
+                        : `${textSecondary} ${hoverBg}`
                         }`}
                     >
                       {range === '24h' ? '24 soat' : range === '7days' ? '7 kun' : range === '30days' ? '30 kun' : 'Yil'}
@@ -139,8 +142,8 @@ const AiCallCenterDashboard = () => {
                     <PhoneIncoming className={`w-6 h-6 ${darkMode ? 'text-green-400' : 'text-green-600'}`} />
                   </div>
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stats.totalCalls.trend === 'up'
-                      ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
-                      : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
+                    ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
+                    : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
                     }`}>
                     {stats.totalCalls.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                     <span className="text-xs font-semibold">{stats.totalCalls.change}%</span>
@@ -169,8 +172,8 @@ const AiCallCenterDashboard = () => {
                     <Clock className={`w-6 h-6 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
                   </div>
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stats.avgDuration.trend === 'down'
-                      ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
-                      : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
+                    ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
+                    : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
                     }`}>
                     {stats.avgDuration.trend === 'down' ? <ArrowDownRight className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
                     <span className="text-xs font-semibold">{Math.abs(stats.avgDuration.change)}%</span>
@@ -193,8 +196,8 @@ const AiCallCenterDashboard = () => {
                     <Wallet className={`w-6 h-6 ${darkMode ? 'text-purple-400' : 'text-purple-600'}`} />
                   </div>
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stats.balance.trend === 'up'
-                      ? darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
-                      : darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
+                    ? darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
+                    : darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
                     }`}>
                     {stats.balance.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                     <span className="text-xs font-semibold">{stats.balance.change}%</span>
@@ -212,8 +215,8 @@ const AiCallCenterDashboard = () => {
                     <Activity className={`w-6 h-6 ${darkMode ? 'text-orange-400' : 'text-orange-600'}`} />
                   </div>
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stats.aiEfficiency.trend === 'up'
-                      ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
-                      : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
+                    ? darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'
+                    : darkMode ? 'bg-red-500/20 text-red-400' : 'bg-red-100 text-red-700'
                     }`}>
                     {stats.aiEfficiency.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                     <span className="text-xs font-semibold">{stats.aiEfficiency.change}%</span>
@@ -322,8 +325,8 @@ const AiCallCenterDashboard = () => {
 
   return (
     <div className={`flex min-h-screen ${bgColor} transition-colors duration-300 font-sans`}>
-      {/* Sidebar - Use sticky to keep it visible while scrolling parent, OR just let it be a flex item */}
-      <aside className={`w-72 flex-shrink-0 border-r ${borderColor} ${cardBg} flex flex-col transition-colors duration-300 z-10 sticky top-0 h-screen overflow-y-auto`}>
+      {/* Sidebar */}
+      <aside className={`w-72 flex-shrink-0 border-r ${borderColor} ${cardBg} flex flex-col transition-colors duration-300 z-10 sticky top-0 h-screen`}>
         {/* Logo */}
         <div className={`p-6 border-b ${borderColor} flex-shrink-0`}>
           <div className="flex items-center gap-3">
@@ -332,14 +335,14 @@ const AiCallCenterDashboard = () => {
             </div>
             <div>
               <h1 className={`text-xl font-bold ${textPrimary}`}>AI Call Center</h1>
-              <p className={`text-xs ${textSecondary}`}>Professional Platform</p>
+              <p className={`text-xs ${textSecondary}`}>"Hududgazta'minoti" AJ</p>
             </div>
           </div>
         </div>
 
         {/* Menu */}
-        <nav className="p-4 flex-1">
-          <div className="space-y-2">
+        <nav className="p-4 flex-1 overflow-y-auto">
+          <div className="space-y-2 mb-8">
             {menuItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeMenu === item.id;
@@ -348,10 +351,10 @@ const AiCallCenterDashboard = () => {
                   key={item.id}
                   onClick={() => setActiveMenu(item.id)}
                   className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 group ${isActive
-                      ? darkMode
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                        : 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
-                      : `${textSecondary} ${hoverBg}`
+                    ? darkMode
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                      : 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
+                    : `${textSecondary} ${hoverBg}`
                     }`}
                 >
                   <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : ''}`} />
@@ -360,6 +363,39 @@ const AiCallCenterDashboard = () => {
                 </button>
               );
             })}
+          </div>
+
+          {/* AI System Status Widget */}
+          <div className={`p-4 rounded-xl border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-slate-50 border-gray-100'}`}>
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className={`p-1.5 rounded-lg ${darkMode ? 'bg-blue-500/10' : 'bg-blue-100'}`}>
+                  <Zap className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+                </div>
+                <span className={`text-xs font-semibold ${textPrimary}`}>AI Engine</span>
+              </div>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between text-[10px] mb-1">
+                  <span className={textSecondary}>Optimization</span>
+                  <span className="text-green-500 font-medium">98% Efficient</span>
+                </div>
+                <div className={`w-full h-1.5 rounded-full overflow-hidden ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                  <div className="h-full bg-gradient-to-r from-blue-500 to-green-500 w-[98%] rounded-full"></div>
+                </div>
+              </div>
+
+              <div className={`flex items-center gap-2 text-[10px] ${textSecondary}`}>
+                <Server className="w-3 h-3" />
+                <span>Qo'ng'iroqlarni real vaqt rejimida qayta ishlash</span>
+              </div>
+            </div>
           </div>
         </nav>
 
@@ -371,7 +407,7 @@ const AiCallCenterDashboard = () => {
         </div>
       </aside>
 
-      {/* Main Layout Area - Flex 1 takes remaining space */}
+      {/* Main Layout Area */}
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         {/* Top Header */}
         <Header activeMenu={activeMenu} darkMode={darkMode} toggleTheme={toggleTheme} />
